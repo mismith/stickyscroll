@@ -1,13 +1,11 @@
 (function($){
 	
-	$.support.stickyscroll = true;
-	
 	$.fn.stickyscroll = function(options){
 		if( ! this.length) return this;
 		
 		options = $.extend({
-			fixedTop:    0, // can also be a selector, e.g. '#header, #menu'
-			fixedBottom: 0,
+			fixedTop:    0, // height to stick top to, e.g. 44 (px)
+			fixedBottom: 0, // these can also be selectors, e.g. '#footer, #fixed'
 		}, options || {});
 		
 		this.each(function(){
