@@ -1,5 +1,5 @@
 (function($){
-  
+	
 	$.support.stickyscroll = true;
 	
 	$.fn.stickyscroll = function(options){
@@ -8,7 +8,7 @@
 		options = $.extend({
 			fixedTop:    0, // can also be a selector, e.g. '#header, #menu'
 			fixedBottom: 0,
-		}, options);
+		}, options || {});
 		
 		this.each(function(){
 			var that        = this,
@@ -56,12 +56,13 @@
 					if(scrollTop > last_scroll_top){ // scrolling DOWN
 						var c_height = $el.outerHeight();
 							
-						if(scrollTop > el.top + c_height - height + fixedBottom){
+						if(scrollTop > el.top + c_height - height + fixedTop + fixedBottom){
 							// don't spill out the bottom
 							$floater.css({
 								position: 'absolute',
-								top:      el.top + c_height - el.height - fixedBottom,
+								top:      el.top + c_height - el.height,
 							});
+							console.log('ab spill');
 						}else if(inset.bottom < 0){
 							// mid-parallax
 							$floater.css({
