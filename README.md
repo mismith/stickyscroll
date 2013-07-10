@@ -5,7 +5,7 @@ stickyscroll
 
 This is a progressive enhancement specifically useful for sidebars that are taller than the browser window but want to remain visible/fixed/stuck/onscreen even with very long page content.
 
-Demo: http://jsfiddle.net/xv5sz/
+Demo: http://jsfiddle.net/UpHUf/
 
 Example Code (with default options):
 
