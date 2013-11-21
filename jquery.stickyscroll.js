@@ -6,6 +6,7 @@
 		options = $.extend({
 			fixedTop:    0, // height to stick top to, e.g. 44 (px)
 			fixedBottom: 0, // these can also be selectors, e.g. '#footer, #fixed'
+			useFixedPositioning: true, // disable this if using position: fixed is broken by your layout somehow; NB: disabling this will significantly reduce performance / introduce janky-ness
 		}, options || {});
 		
 		this.each(function(){
@@ -39,7 +40,7 @@
 				width:    el.width,
 			});
 			
-			$(window).on('scroll touchmove', function(){
+			$(window).on('scroll.stickyscroll touchmove.stickyscroll', function(){
 				if(spilling){
 					el.height = $floater.outerHeight();
 					
@@ -70,8 +71,8 @@
 						}else{
 							// bottomed-out
 							$floater.css({
-								position: 'fixed',
-								top:      Math.max(inset.top, height - el.height) - fixedBottom,
+								position: options.useFixedPositioning ? 'fixed' : 'absolute',
+								top:      Math.max(inset.top, height - el.height) - fixedBottom + (options.useFixedPositioning ? 0 : scrollTop),
 							});
 						}
 					}else if(scrollTop < last_scroll_top){ // scrolling UP
@@ -90,8 +91,8 @@
 						}else{
 							// topped-out
 							$floater.css({
-								position: 'fixed',
-								top:      Math.min(0, inset.top) + fixedTop,
+								position: options.useFixedPositioning ? 'fixed' : 'absolute',
+								top:      Math.min(0, inset.top) + fixedTop + (options.useFixedPositioning ? 0 : scrollTop),
 							});
 						}
 					}
@@ -103,7 +104,7 @@
 				}
 				last_scroll_top = scrollTop;
 			});
-			$(window).on('resize', function(){
+			$(window).on('resize.stickyscroll', function(){
 				resize();
 			});
 			resize();
