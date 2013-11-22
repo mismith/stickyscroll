@@ -61,7 +61,6 @@
 								position: 'absolute',
 								top:      el.top + c_height - el.height,
 							});
-							console.log('ab spill');
 						}else if(inset.bottom < 0){
 							// mid-parallax
 							$floater.css({
