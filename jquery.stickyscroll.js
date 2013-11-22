@@ -29,7 +29,7 @@
 				el       = {top: $el.offset().top, width: $el.width()}, // store some useful values
 				$floater = $el.wrapInner('<div class="floater"></div>').find('> .floater'), // wrap contents with .floater
 				resize   = function(){
-					spilling = $floater.outerHeight() > $(window).height() - fixedTop - fixedBottom;
+					spilling = $floater.outerHeight() > ($(window).height() - fixedTop - fixedBottom);
 				}
 			
 			$floater.css({
@@ -103,10 +103,9 @@
 				}
 				last_scroll_top = scrollTop;
 			});
-			$(window).on('resize.stickyscroll', function(){
+			$(window).on('load.stickyscroll resize.stickyscroll', function(){
 				resize();
 			});
-			resize();
 		});
 	};
 	
