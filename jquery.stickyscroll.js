@@ -6,7 +6,6 @@
 		options = $.extend({
 			fixedTop:    0, // height to stick top to, e.g. 44 (px)
 			fixedBottom: 0, // these can also be selectors, e.g. '#footer, #fixed'
-			useFixedPositioning: true, // disable this if using position: fixed is broken by your layout somehow; NB: disabling this will significantly reduce performance / introduce janky-ness
 		}, options || {});
 		
 		this.each(function(){
@@ -70,8 +69,8 @@
 						}else{
 							// bottomed-out
 							$floater.css({
-								position: options.useFixedPositioning ? 'fixed' : 'absolute',
-								top:      Math.max(inset.top, height - el.height) - fixedBottom + (options.useFixedPositioning ? 0 : scrollTop),
+								position: 'fixed',
+								top:      Math.max(inset.top, height - el.height) - fixedBottom,
 							});
 						}
 					}else if(scrollTop < last_scroll_top){ // scrolling UP
@@ -90,8 +89,8 @@
 						}else{
 							// topped-out
 							$floater.css({
-								position: options.useFixedPositioning ? 'fixed' : 'absolute',
-								top:      Math.min(0, inset.top) + fixedTop + (options.useFixedPositioning ? 0 : scrollTop),
+								position: 'fixed',
+								top:      Math.min(0, inset.top) + fixedTop,
 							});
 						}
 					}
